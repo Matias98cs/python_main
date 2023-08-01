@@ -1,0 +1,34 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "89d6491926934fb8ca44de394cafc1baf221ed5c56a318b6af0030a4b337c1a2"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.12"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "pymssql": {
+            "hashes": [
+                "sha256:30bfd7b8edef78097ccd3f52ac3f3a5c3cf0019f8a280f306cacbbb165caaf63",
+                "sha256:381d8a47c4665d99f114849bed23bcba1922c9d005accc3ac19cee8a1d3522dc",
+                "sha256:895041edd002a2e91d8a4faf0906b6fbfef29d9164bc6beb398421f5927fa40e",
+                "sha256:9baefbfbd07d0142756e2dfcaa804154361ac5806ab9381350aad4e780c3033e",
+                "sha256:d873e553374d5b1c57fe1c43bb75e3bcc2920678db1ef26f6bfed396c7d21b30",
+                "sha256:e920d6f805a525f19e770e48326a5f96b83d7b8dfd093f5b7015b54ef84bcf4c",
+                "sha256:ebe7f64d5278d807f14bea08951e02512bfbc6219fd4d4f15bb45ded885cf3d4"
+            ],
+            "index": "pypi",
+            "version": "==2.2.8"
+        }
+    },
+    "develop": {}
+}
