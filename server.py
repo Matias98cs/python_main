@@ -1,13 +1,6 @@
-import sqlalchemy
-import requests
-from flask import Flask, request
+from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import select, update, func
-import time
-from sqlalchemy.exc import SQLAlchemyError
 import json
-from datetime import datetime
-from types import SimpleNamespace
 
 
 def searchDB(DB):
@@ -41,8 +34,9 @@ class Peticioneservidor(db.Model):
     fechainsercion = db.Column(db.DateTime)
     fecha = db.Column(db.DateTime)
 
-    def __init__(self, parametro2):
-        self.parametro2 = parametro2
+    def __init__(self, parametro1, estado):
+        self.parametro1 = parametro1
+        self.estado = estado
 
 
 @app.route('/', methods=['GET'])
@@ -53,18 +47,20 @@ def home():
     sucursal = request.args.get('sucursal')
     print(
         f"search: {search} | categoria: {categoria} | rangoregistros: {rangoregistros} | sucursal: {sucursal}")
-    parametro2 = {
+    parametro1 = {
         "s": search,
         "categoria": categoria,
         "rangoregistros": rangoregistros,
         "sucursal": sucursal,
     }
-    parametro2 = json.dumps(parametro2)
-    params = Peticioneservidor(parametro2=parametro2)
+    parametro1 = json.dumps(parametro1)
+    params_json = jsonify(parametro1)
+    params = Peticioneservidor(parametro1=parametro1, estado=0)
+    response = make_response(params_json, 200)
+    response.headers['Content-Type'] = 'application/json'
     db.session.add(params)
     db.session.commit()
-    print(params)
-    return []
+    return response
 
 
 if __name__ == '__main__':
