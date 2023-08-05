@@ -58,6 +58,9 @@ def search():
 
         try:
             with session_mysql.begin():
+                stmt = text(
+                    'SET TRANSACTION ISOLATION LEVEL READ COMMITTED')
+                session_mysql.execute(stmt)
                 consulta_1 = update(Peticioneservidor).values(
                     instancia='Py1', estado=1, fechainsercion=datetime.now()).where(Peticioneservidor.estado == 0)
                 session_mysql.execute(consulta_1)
