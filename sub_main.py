@@ -1,6 +1,7 @@
 from sqlalchemy import select, update
 from sqlalchemy.sql import text
 from sub_main.database import crear_conexion, obtener_session
+from sqlalchemy.exc import IntegrityError
 from sub_main.models import Base, Peticioneservidor
 from types import SimpleNamespace
 import data.data as data
@@ -51,20 +52,40 @@ def search():
     print('Entro')
     while True:
         if fecha_aux == 1 or fecha_aux > fecha:
+            print('Datos')
             data_big = format_json()
             fecha = datetime.today().strftime('%Y-%m-%d')
         fecha_aux = datetime.today().strftime('%Y-%m-%d')
 
-        with session_mysql:
-            consulta_1 = update(Peticioneservidor).values(instancia='Py1', estado=1,
-                                                          fechainsercion=datetime.now()).where(Peticioneservidor.estado == 0)
-            session_mysql.execute(consulta_1)
+        try:
+            with session_mysql.begin():
+                consulta_1 = update(Peticioneservidor).values(
+                    instancia='Py1', estado=1, fechainsercion=datetime.now()).where(Peticioneservidor.estado == 0)
+                session_mysql.execute(consulta_1)
             session_mysql.commit()
+        except IntegrityError as e:
+            print(f"Error de integridad: {e}")
+            session_mysql.rollback()
+        except Exception as e:
+            print(f"Error desconocido: {e}")
+            session_mysql.rollback()
+        finally:
+            session_mysql.close()
 
-        consulta_2 = select(Peticioneservidor.parametro1).where(
-            (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
+        try:
+            with session_mysql.begin():
+                consulta_2 = select(Peticioneservidor.parametro1).where(
+                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
 
-        select_consult = session_mysql.execute(consulta_2).fetchall()
+                select_consult = session_mysql.execute(consulta_2).fetchall()
+        except IntegrityError as e:
+            print(f"Error de integridad: {e}")
+            session_mysql.rollback()
+        except Exception as e:
+            print(f"Error desconocido: {e}")
+            session_mysql.rollback()
+        finally:
+            session_mysql.close()
 
         for item in select_consult:
             print(item)

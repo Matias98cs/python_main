@@ -1,6 +1,9 @@
 from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import IntegrityError
 import json
+import time
+import asyncio
 
 
 def searchDB(DB):
@@ -39,8 +42,27 @@ class Peticioneservidor(db.Model):
         self.estado = estado
 
 
+def insertar_y_obtener_datos(parametro1):
+    try:
+        with db.session.begin():
+            obj_saved = Peticioneservidor(parametro1=parametro1, estado=0)
+            db.session.add(obj_saved)
+            db.session.flush()
+        obj_id = db.session.query(Peticioneservidor).filter_by(
+            id=obj_saved.id).first()
+        return obj_id.id
+    except IntegrityError as e:
+        db.session.rollback()
+        print(f"Error de integridad: {e}")
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error desconocido: {e}")
+    finally:
+        db.session.close()
+
+
 @app.route('/', methods=['GET'])
-def home():
+async def home():
     categoria = request.args.get('categoria')
     search = request.args.get('s')
     rangoregistros = request.args.get('rangoregistros')
@@ -54,12 +76,12 @@ def home():
         "sucursal": sucursal,
     }
     parametro1 = json.dumps(parametro1)
-    params_json = jsonify(parametro1)
-    params = Peticioneservidor(parametro1=parametro1, estado=0)
-    response = make_response(params_json, 200)
+    consult_id = insertar_y_obtener_datos(parametro1)
+    await asyncio.sleep(0.01)
+    find = db.session.query(Peticioneservidor).filter_by(
+        id=consult_id).first()
+    response = make_response(find.parametro2, 200)
     response.headers['Content-Type'] = 'application/json'
-    db.session.add(params)
-    db.session.commit()
     return response
 
 
