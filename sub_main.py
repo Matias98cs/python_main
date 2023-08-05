@@ -1,9 +1,9 @@
 from sqlalchemy import select, update
 from sqlalchemy.sql import text
-from database import crear_conexion, obtener_session
-from models import Base, Peticioneservidor
+from sub_main.database import crear_conexion, obtener_session
+from sub_main.models import Base, Peticioneservidor
 from types import SimpleNamespace
-import data
+import data.data as data
 import time
 import json
 import calendar
@@ -54,8 +54,6 @@ def search():
             data_big = format_json()
             fecha = datetime.today().strftime('%Y-%m-%d')
         fecha_aux = datetime.today().strftime('%Y-%m-%d')
-        # consulta_1 = update(Peticioneservidor).values(instancia='Py1', estado=1,
-        #                                               fechainsercion=datetime.now()).where(Peticioneservidor.estado == 0)
 
         with session_mysql:
             consulta_1 = update(Peticioneservidor).values(instancia='Py1', estado=1,
@@ -63,20 +61,10 @@ def search():
             session_mysql.execute(consulta_1)
             session_mysql.commit()
 
-        # session_mysql.commit()
-        # session_mysql.execute(consulta_1)
-        # session_mysql.commit()
-        # session_mysql.close()
-
         consulta_2 = select(Peticioneservidor.parametro1).where(
             (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
 
         select_consult = session_mysql.execute(consulta_2).fetchall()
-        # print(select_consult)
-        # if select_consult == []:
-        #     # print('VACIO')
-        #     time.sleep(0.01)
-        # session_mysql.close()
 
         for item in select_consult:
             print(item)
@@ -88,8 +76,8 @@ def search():
                     item.parametro1, object_hook=lambda d: SimpleNamespace(**d))
 
                 parametros = {
-                    "search": obj_string.s,
-                    "categoria": obj_string.categoria,
+                    "search": obj_string.s if hasattr(obj_string, 's') else '',
+                    "categoria": obj_string.categoria if hasattr(obj_string, 'categoria') else '',
                 }
                 match parametros:
                     case parametros if parametros['search'] != '' and parametros['search'] != None and parametros['search'] is not None:
@@ -107,13 +95,7 @@ def search():
                                 (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
                             session_mysql.execute(query)
                             session_mysql.commit()
-                        # session_mysql.close()
-                        # session_mysql.connection()
-                        # query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                        #     (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                        # session_mysql.execute(query)
-                        # session_mysql.commit()
-                        # session_mysql.close()
+
                     case parametros if parametros['categoria'] != '' and parametros['categoria'] != None and parametros['categoria'] is not None:
                         print(
                             f"---------- categoria: {parametros['categoria']} ----------")
@@ -129,13 +111,7 @@ def search():
                                 (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
                             session_mysql.execute(query)
                             session_mysql.commit()
-                        # session_mysql.close()
-                        # session_mysql.connection()
-                        # query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                        #     (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                        # session_mysql.execute(query)
-                        # session_mysql.commit()
-                        # session_mysql.close()
+
                     case parametros if parametros['search'] == '' and parametros['search'] is not None and parametros['categoria'] != '' and parametros['categoria'] is not None:
                         a['ctimestamp'] = time_stamp
                         a['registros'] = []
@@ -146,7 +122,7 @@ def search():
                                 (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
                             session_mysql.execute(query)
                             session_mysql.commit()
-                        # session_mysql.close()
+
                     case _:
                         a['ctimestamp'] = time_stamp
                         a['registros'] = []
@@ -157,13 +133,6 @@ def search():
                                 (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
                             session_mysql.execute(query)
                             session_mysql.commit()
-                        # session_mysql.close()
-                        # session_mysql.connection()
-                        # query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                        #     (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                        # session_mysql.execute(query)
-                        # session_mysql.commit()
-                        # session_mysql.close()
 
 
 if __name__ == "__main__":
