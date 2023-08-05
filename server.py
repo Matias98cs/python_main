@@ -1,5 +1,6 @@
 from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 import json
 import time
@@ -20,6 +21,7 @@ arch = open('configDB.ini', 'r')
 DB = eval(arch.read())
 SQLALCHEMY_DATABASE_URI = searchDB(DB)
 app = Flask(__name__)
+CORS(app, origins=["http://localhost:5173"])
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 

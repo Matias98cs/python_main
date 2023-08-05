@@ -52,7 +52,6 @@ def search():
     print('Entro')
     while True:
         if fecha_aux == 1 or fecha_aux > fecha:
-            print('Datos')
             data_big = format_json()
             fecha = datetime.today().strftime('%Y-%m-%d')
         fecha_aux = datetime.today().strftime('%Y-%m-%d')
