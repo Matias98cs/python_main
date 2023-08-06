@@ -1,6 +1,6 @@
 from sqlalchemy import select, update
 from sqlalchemy.sql import text
-from sub_main.database import crear_conexion, obtener_session
+from sub_main.database import obtener_session
 from sqlalchemy.exc import IntegrityError
 from sub_main.models import Base, Peticioneservidor
 from types import SimpleNamespace
@@ -13,12 +13,9 @@ from datetime import datetime
 arch = open('ConfigDB.ini', 'r')
 DB = eval(arch.read())
 base_general = "pruebaspython"
-engine_mysql = crear_conexion(
+
+session_mysql = obtener_session(
     f"{DB['username']}", f"{DB['password']}", f"{DB['server']}", base_general)
-
-
-Base.metadata.create_all(engine_mysql)
-session_mysql = obtener_session(engine_mysql)
 
 a = {'statussalida': '',
      'registros': '',

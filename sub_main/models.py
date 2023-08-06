@@ -1,9 +1,7 @@
 from sqlalchemy import Column, Integer, String, TEXT, text, Date, case, func
 from sqlalchemy.orm import relationship, declarative_base
 from datetime import date
-
-
-Base = declarative_base()
+from .database import Base
 
 
 class Peticioneservidor(Base):
