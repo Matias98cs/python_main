@@ -9,7 +9,7 @@ from sqlalchemy import func
 import calendar
 import time
 import json
-import data
+import data.data as data
 
 a = {'statussalida': '',
      'registros': '',
