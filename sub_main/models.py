@@ -2,9 +2,10 @@ from sqlalchemy import Column, Integer, String, TEXT, text, Date, case, func
 from sqlalchemy.orm import relationship, declarative_base
 from datetime import date
 from .database import Base
+from helpers.gestores import comun
 
 
-class Peticioneservidor(Base):
+class Peticioneservidor(Base, comun):
     __tablename__ = 'peticioneservidor'
     id = Column(Integer, primary_key=True)
     instancia = Column(String(255))
