@@ -1770,3 +1770,661 @@ articulosWeb = {
     "camposseguros": [],
     "ctimestamp": 1689593385
 }
+
+ofertas = {
+    "statussalida": "",
+    "registros": [
+        {
+            "marca": 36,
+            "codigo": 189,
+            "fechadesde": "2017-07-15T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 11.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1058,
+            "codigo": 239,
+            "fechadesde": "2018-12-04T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 24.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 9968,
+            "codigo": 1542,
+            "fechadesde": "2012-01-18T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 9.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4000,
+            "codigo": 9752,
+            "fechadesde": "2015-01-31T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 9.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1293,
+            "codigo": 644,
+            "fechadesde": "2018-11-28T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 94.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 8013,
+            "codigo": 9006,
+            "fechadesde": "2008-07-18T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 3.49,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 4767,
+            "fechadesde": "2017-01-03T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 69.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 6039,
+            "codigo": 160,
+            "fechadesde": "2017-01-03T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 39.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 272,
+            "codigo": 459,
+            "fechadesde": "2015-05-21T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 8,
+            "precio": 8.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 6039,
+            "codigo": 160,
+            "fechadesde": "2013-04-18T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 2,
+            "precio": 7.55,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 6039,
+            "codigo": 160,
+            "fechadesde": "2013-04-15T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 7.55,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 159,
+            "fechadesde": "2018-01-15T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 4.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 3509,
+            "fechadesde": "2018-02-03T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 15.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 3778,
+            "fechadesde": "2018-11-14T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 14.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 4721,
+            "fechadesde": "2017-11-23T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 6.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 6860,
+            "fechadesde": "2018-12-04T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 5.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 4600,
+            "codigo": 987663,
+            "fechadesde": "2018-02-03T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 12.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 3040,
+            "codigo": 6093,
+            "fechadesde": "2018-11-24T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 69.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2129,
+            "codigo": 7256,
+            "fechadesde": "2018-11-24T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 99.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2190,
+            "codigo": 432,
+            "fechadesde": "2023-05-02T00:00:00-03:00",
+            "fechahasta": "2025-05-02T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 299.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2190,
+            "codigo": 432,
+            "fechadesde": "2023-05-02T00:00:00-03:00",
+            "fechahasta": "2025-05-20T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 199.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2190,
+            "codigo": 442,
+            "fechadesde": "2014-12-18T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 7,
+            "precio": 13.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 976,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 39.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 1658,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 35.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 1659,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 39.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 2315,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 52.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 2365,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 36.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1813,
+            "codigo": 8067,
+            "fechadesde": "2018-08-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 35.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1427,
+            "codigo": 125,
+            "fechadesde": "2018-03-05T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 29.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1058,
+            "codigo": 60606,
+            "fechadesde": "2018-06-19T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 18.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 670,
+            "codigo": 3126,
+            "fechadesde": "2016-06-29T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 12.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 670,
+            "codigo": 436438,
+            "fechadesde": "2018-12-03T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 299,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 480,
+            "codigo": 828,
+            "fechadesde": "2018-10-12T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 99.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 272,
+            "codigo": 103,
+            "fechadesde": "2014-01-20T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 17.84,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 290,
+            "codigo": 16323,
+            "fechadesde": "2023-06-15T00:00:00-03:00",
+            "fechahasta": "2024-06-15T00:00:00-03:00",
+            "sucursal": 8,
+            "precio": 21,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 110,
+            "codigo": 4029,
+            "fechadesde": "2018-08-07T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 19.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 110,
+            "codigo": 5338,
+            "fechadesde": "2017-02-24T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 10.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 60,
+            "codigo": 96055,
+            "fechadesde": "2018-11-08T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 5.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 580,
+            "codigo": 8421,
+            "fechadesde": "2023-05-01T00:00:00-03:00",
+            "fechahasta": "2024-05-15T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 4.29,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 580,
+            "codigo": 8421,
+            "fechadesde": "2023-02-15T00:00:00-03:00",
+            "fechahasta": "2024-05-15T00:00:00-03:00",
+            "sucursal": 3,
+            "precio": 4.3,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 580,
+            "codigo": 8421,
+            "fechadesde": "2023-05-15T00:00:00-03:00",
+            "fechahasta": "2024-05-15T00:00:00-03:00",
+            "sucursal": 8,
+            "precio": 4.5,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 630,
+            "codigo": 1036,
+            "fechadesde": "2011-10-20T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 9.49,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 360,
+            "codigo": 22072,
+            "fechadesde": "2018-09-03T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 29.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1293,
+            "codigo": 645,
+            "fechadesde": "2017-09-20T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 64.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2798,
+            "codigo": 738,
+            "fechadesde": "2018-07-30T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 25.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1290,
+            "codigo": 127,
+            "fechadesde": "2014-03-31T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 74.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 526,
+            "fechadesde": "2017-07-24T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 64.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 9522,
+            "fechadesde": "2017-07-24T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 64.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 9524,
+            "fechadesde": "2017-07-24T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 64.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 3360,
+            "codigo": 4771,
+            "fechadesde": "2023-06-17T00:00:00-03:00",
+            "fechahasta": "2023-12-23T00:00:00-03:00",
+            "sucursal": 8,
+            "precio": 21,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 3360,
+            "codigo": 4771,
+            "fechadesde": "2017-12-26T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 19.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 272,
+            "codigo": 459,
+            "fechadesde": "2015-05-05T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 8.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 60,
+            "codigo": 2502,
+            "fechadesde": "2015-09-15T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 14.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 60,
+            "codigo": 22840,
+            "fechadesde": "2016-03-20T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 9,
+            "precio": 16.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 6039,
+            "codigo": 160,
+            "fechadesde": "2017-01-05T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 4,
+            "precio": 39.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 6039,
+            "codigo": 160,
+            "fechadesde": "2017-01-05T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 9,
+            "precio": 39.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 409,
+            "fechadesde": "2016-12-07T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 33.49,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 3667,
+            "fechadesde": "2016-12-07T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 33.49,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 6630,
+            "fechadesde": "2016-12-07T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 33.49,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 561,
+            "fechadesde": "2016-11-01T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 59.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 9526,
+            "fechadesde": "2016-11-01T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 59.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1293,
+            "codigo": 982,
+            "fechadesde": "2018-08-22T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 74.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 2300,
+            "codigo": 4609,
+            "fechadesde": "2017-11-14T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 84.99,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 1293,
+            "codigo": 646,
+            "fechadesde": "2017-11-22T00:00:00-03:00",
+            "fechahasta": "2025-03-01T00:00:00-03:00",
+            "sucursal": 0,
+            "precio": 59.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        },
+        {
+            "marca": 80,
+            "codigo": 6778,
+            "fechadesde": "2015-10-22T00:00:00-03:00",
+            "fechahasta": "2028-12-10T00:00:00-03:00",
+            "sucursal": 1,
+            "precio": 16.9,
+            "preciomay": 0,
+            "cantidadmayorista": 0
+        }
+    ],
+    "camposseguros": [],
+    "ctimestamp": 1691414310
+}

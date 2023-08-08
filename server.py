@@ -69,13 +69,15 @@ async def home():
     search = request.args.get('s')
     rangoregistros = request.args.get('rangoregistros')
     sucursal = request.args.get('sucursal')
+    ofertas = request.args.get('ofertas')
     print(
-        f"search: {search} | categoria: {categoria} | rangoregistros: {rangoregistros} | sucursal: {sucursal}")
+        f"search: {search} | categoria: {categoria} | rangoregistros: {rangoregistros} | sucursal: {sucursal} | ofertas: {ofertas}")
     parametro1 = {
         "s": search,
         "categoria": categoria,
         "rangoregistros": rangoregistros,
         "sucursal": sucursal,
+        "ofertas": ofertas,
     }
     parametro1 = json.dumps(parametro1)
     consult_id = insertar_y_obtener_datos(parametro1)
