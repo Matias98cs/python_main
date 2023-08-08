@@ -61,12 +61,21 @@ def search():
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
                             json_searched = json.dumps(a)
-                            print(json_searched)
-                            with session_mysql:
-                                query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                                session_mysql.execute(query)
+                            try:
+                                with session_mysql.begin():
+                                    query = text(
+                                        "UPDATE Peticioneservidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = '"+json_searched+"' WHERE instancia = 'Py1' AND estado = 1 AND JSON_EXTRACT(parametro1, '$.s') = '"+parametros[
+                                            'search']+"' "
+                                    )
+                                    session_mysql.execute(query)
                                 session_mysql.commit()
+                            except IntegrityError as e:
+                                print(f"Error de integridad: {e}")
+                                session_mysql.rollback()
+                            except Exception as e:
+                                session_mysql.rollback()
+                            finally:
+                                session_mysql.close()
 
                         case parametros if parametros['categoria'] != '' and parametros['search'] == '' and parametros['ofertas'] == '':
                             print(
@@ -77,48 +86,36 @@ def search():
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
                             json_searched = json.dumps(a)
-                            print(json_searched)
-                            with session_mysql:
-                                query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                                session_mysql.execute(query)
-                                session_mysql.commit()
+                            # print(json_searched)
+                            Peticioneservidor.update_request(
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
 
                         case parametros if parametros['ofertas'] == 'S' and parametros['ofertas'] != '' and parametros['search'] == '' and parametros['categoria'] == '':
                             print(
-                                f"---------- search: {parametros['ofertas']} ----------")
+                                f"---------- Promos: {parametros['ofertas']} ----------")
                             a['ctimestamp'] = time_stamp
                             a['registros'] = data_promos
                             json_searched = json.dumps(a)
-                            print(json_searched)
-                            with session_mysql:
-                                query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                                session_mysql.execute(query)
-                                session_mysql.commit()
+                            # print(json_searched)
+                            Peticioneservidor.update_request(
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
+
                         case parametros if parametros['search'] == '' and parametros['categoria'] == '' and parametros['ofertas'] == '':
                             print(
-                                f"---------- search: {'parametros vacios'} ----------")
+                                f"---------- Vacio: {'parametros vacios'} ----------")
                             a['ctimestamp'] = time_stamp
                             a['registros'] = []
                             json_searched = json.dumps(a)
-                            print(json_searched)
-                            with session_mysql:
-                                query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                                session_mysql.execute(query)
-                                session_mysql.commit()
-
+                            # print(json_searched)
+                            Peticioneservidor.update_request(
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
                         case _:
                             a['ctimestamp'] = time_stamp
                             a['registros'] = []
                             json_searched = json.dumps(a)
-                            print(json_searched)
-                            with session_mysql:
-                                query = update(Peticioneservidor).values(estado=2, fecha=datetime.now(), parametro2=json_searched).where(
-                                    (Peticioneservidor.instancia == 'Py1') & (Peticioneservidor.estado == 1))
-                                session_mysql.execute(query)
-                                session_mysql.commit()
+                            # print(json_searched)
+                            Peticioneservidor.update_request(
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
 
 
 if __name__ == "__main__":

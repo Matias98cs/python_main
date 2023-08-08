@@ -45,3 +45,26 @@ class comun():
             session.rollback()
         finally:
             session.close()
+
+    @classmethod
+    def update_request(cls, session, **kwargs):
+        try:
+            with session.begin():
+                query = (
+                    update(cls)
+                    .values(**kwargs)
+                    .where((cls.instancia == 'Py1') & (cls.estado == 1))
+                )
+                # query = text(
+                #     query = text("UPDATE PeticionesServidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = :json_searched1 WHERE instancia = :name AND estado = 1 AND JSON_VALUE(parametro1, '$.s') = :search")
+                # )
+                session.execute(query)
+            session.commit()
+        except IntegrityError as e:
+            print(f"Error de integridad: {e}")
+            session.rollback()
+        except Exception as e:
+            print(f"Error desconocido: {e}")
+            session.rollback()
+        finally:
+            session.close()
