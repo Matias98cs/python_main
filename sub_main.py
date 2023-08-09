@@ -61,21 +61,24 @@ def search():
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
                             json_searched = json.dumps(a)
-                            try:
-                                with session_mysql.begin():
-                                    query = text(
-                                        "UPDATE Peticioneservidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = '"+json_searched+"' WHERE instancia = 'Py1' AND estado = 1 AND JSON_EXTRACT(parametro1, '$.s') = '"+parametros[
-                                            'search']+"' "
-                                    )
-                                    session_mysql.execute(query)
-                                session_mysql.commit()
-                            except IntegrityError as e:
-                                print(f"Error de integridad: {e}")
-                                session_mysql.rollback()
-                            except Exception as e:
-                                session_mysql.rollback()
-                            finally:
-                                session_mysql.close()
+                            Peticioneservidor.update_request(session_mysql, estado=2, fecha=datetime.now(
+                            ), parametro2=json_searched, parametro=parametros['search'], c='s')
+
+                            # try:
+                            #     with session_mysql.begin():
+                            #         query = text(
+                            #             "UPDATE Peticioneservidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = '"+json_searched+"' WHERE instancia = 'Py1' AND estado = 1 AND JSON_EXTRACT(parametro1, '$.s') = '"+parametros[
+                            #                 'search']+"' "
+                            #         )
+                            #         session_mysql.execute(query)
+                            #     session_mysql.commit()
+                            # except IntegrityError as e:
+                            #     print(f"Error de integridad: {e}")
+                            #     session_mysql.rollback()
+                            # except Exception as e:
+                            #     session_mysql.rollback()
+                            # finally:
+                            #     session_mysql.close()
 
                         case parametros if parametros['categoria'] != '' and parametros['search'] == '' and parametros['ofertas'] == '':
                             print(
@@ -88,7 +91,7 @@ def search():
                             json_searched = json.dumps(a)
                             # print(json_searched)
                             Peticioneservidor.update_request(
-                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched, parametro=parametros['categoria'], c='categoria')
 
                         case parametros if parametros['ofertas'] == 'S' and parametros['ofertas'] != '' and parametros['search'] == '' and parametros['categoria'] == '':
                             print(
@@ -98,7 +101,7 @@ def search():
                             json_searched = json.dumps(a)
                             # print(json_searched)
                             Peticioneservidor.update_request(
-                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched, parametro=parametros['ofertas'], c='ofertas')
 
                         case parametros if parametros['search'] == '' and parametros['categoria'] == '' and parametros['ofertas'] == '':
                             print(

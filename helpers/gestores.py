@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.sql import text
+from sqlalchemy.sql import text, and_, func
 from sqlalchemy import select, update
 
 
@@ -48,16 +48,27 @@ class comun():
 
     @classmethod
     def update_request(cls, session, **kwargs):
+        parametro = kwargs.get('parametro')
+        c = kwargs.get('c')
+        estado = kwargs.get('estado')
+        fecha = kwargs.get('fecha')
+        parametro2 = kwargs.get('parametro2')
         try:
             with session.begin():
+                # JSON_VALUE
+                # JSON_EXTRACT
                 query = (
                     update(cls)
-                    .values(**kwargs)
-                    .where((cls.instancia == 'Py1') & (cls.estado == 1))
+                    .values(estado=estado, fecha=fecha, parametro2=parametro2)
+                    .where(
+                        and_(
+                            cls.instancia == 'Py1',
+                            cls.estado == 1,
+                            func.JSON_VALUE(
+                                cls.parametro1, f"$.{c}") == parametro
+                        )
+                    )
                 )
-                # query = text(
-                #     query = text("UPDATE PeticionesServidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = :json_searched1 WHERE instancia = :name AND estado = 1 AND JSON_VALUE(parametro1, '$.s') = :search")
-                # )
                 session.execute(query)
             session.commit()
         except IntegrityError as e:
