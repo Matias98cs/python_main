@@ -1,5 +1,5 @@
 from sqlalchemy import select, update
-from helpers.format_data import format_json, a, promo_json
+from helpers.format_data import format_json, a, promo_json, products_api
 from sqlalchemy.sql import text
 from sub_main.database import obtener_session
 from sqlalchemy.exc import IntegrityError
@@ -27,6 +27,7 @@ def search():
         if fecha_aux == 1 or fecha_aux > fecha:
             data_big = format_json()
             data_promos = promo_json()
+            data_products = products_api()
             fecha = datetime.today().strftime('%Y-%m-%d')
         fecha_aux = datetime.today().strftime('%Y-%m-%d')
 
@@ -56,7 +57,7 @@ def search():
                             print(
                                 f"---------- search: {parametros['search']} ----------")
                             searched_articles = [
-                                item for item in data_big if f"{parametros['search'].lower()}" in item['descripcion'].lower()]
+                                item for item in data_products if f"{parametros['search'].lower()}" in item['description'].lower()]
                             cut_list = searched_articles
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
@@ -89,7 +90,6 @@ def search():
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
                             json_searched = json.dumps(a)
-                            # print(json_searched)
                             Peticioneservidor.update_request(
                                 session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched, parametro=parametros['categoria'], c='categoria')
 
@@ -99,26 +99,32 @@ def search():
                             a['ctimestamp'] = time_stamp
                             a['registros'] = data_promos
                             json_searched = json.dumps(a)
-                            # print(json_searched)
                             Peticioneservidor.update_request(
                                 session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched, parametro=parametros['ofertas'], c='ofertas')
 
-                        case parametros if parametros['search'] == '' and parametros['categoria'] == '' and parametros['ofertas'] == '':
+                        case parametros if parametros['search'] == '' and parametros['categoria'] == '' and parametros['ofertas'] == '' and parametros['sucursal'] == '':
                             print(
                                 f"---------- Vacio: {'parametros vacios'} ----------")
                             a['ctimestamp'] = time_stamp
                             a['registros'] = []
                             json_searched = json.dumps(a)
-                            # print(json_searched)
+                            Peticioneservidor.update_request(
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
+
+                        case parametros if parametros['sucursal'] != '' and parametros['search'] == '' and parametros['categoria'] == '':
+                            print(
+                                f"---------- Todos los productos: {parametros['sucursal']} ----------")
+                            a['ctimestamp'] = time_stamp
+                            a['registros'] = data_products
+                            json_searched = json.dumps(a)
                             Peticioneservidor.update_request(
                                 session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
                         case _:
                             a['ctimestamp'] = time_stamp
                             a['registros'] = []
                             json_searched = json.dumps(a)
-                            # print(json_searched)
                             Peticioneservidor.update_request(
-                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)
+                                session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched, parametro=parametros['ofertas'], c='sucursal')
 
 
 if __name__ == "__main__":

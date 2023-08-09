@@ -1,5 +1,7 @@
 import data.data as data
 import json
+import requests
+
 
 a = {'statussalida': '',
      'registros': '',
@@ -24,6 +26,12 @@ def format_json():
 
     articles = [item for item in articles if 'categoria' in item]
     return articles
+
+
+def products_api():
+    json_products = requests.get('https://api.escuelajs.co/api/v1/products')
+    data_products = json.loads(json_products.content)
+    return data_products
 
 
 def promo_json():
