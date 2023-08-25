@@ -45,6 +45,14 @@ class Peticioneservidor(db.Model):
         self.estado = estado
 
 
+class Productos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String)
+    precio = db.Column(db.Integer)
+    descripcion = db.Column(db.String)
+    categoria_id = db.Column(db.Integer)
+
+
 def insertar_y_obtener_datos(parametro1):
     try:
         with db.session.begin():
@@ -88,6 +96,30 @@ async def home():
     response = make_response(find.parametro2, 200)
     response.headers['Content-Type'] = 'application/json'
     return response
+
+
+@app.route('/productos', methods=['GET'])
+def get_productos():
+    try:
+        get_all_productos = db.session.query(Productos).all()
+        productos_list = []
+        for product in get_all_productos:
+            product_dict = {
+                'id': product.id,
+                'nombre': product.nombre,
+                'precio': product.precio,
+                'descripcion': product.descripcion,
+                'categoria_id': product.categoria_id,
+
+            }
+            productos_list.append(product_dict)
+        response = make_response(productos_list, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+    except Exception as e:
+        print(f"Hubo un error: {e}")
+        return jsonify({"error": str(e)})
 
 
 if __name__ == '__main__':
