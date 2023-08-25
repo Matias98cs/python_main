@@ -53,6 +53,11 @@ class Productos(db.Model):
     categoria_id = db.Column(db.Integer)
 
 
+class Categorias(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String)
+
+
 def insertar_y_obtener_datos(parametro1):
     try:
         with db.session.begin():
@@ -117,6 +122,25 @@ def get_productos():
         response.headers['Content-Type'] = 'application/json'
         return response
 
+    except Exception as e:
+        print(f"Hubo un error: {e}")
+        return jsonify({"error": str(e)})
+
+
+@app.route('/categorias', methods=['GET'])
+def get_categorias():
+    try:
+        get_categorias = db.session.query(Categorias).all()
+        categorias_list = []
+        for categoria in get_categorias:
+            categoria_dict = {
+                "id": categoria.id,
+                "nombre": categoria.nombre
+            }
+            categorias_list.append(categoria_dict)
+        response = make_response(categorias_list, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
     except Exception as e:
         print(f"Hubo un error: {e}")
         return jsonify({"error": str(e)})
