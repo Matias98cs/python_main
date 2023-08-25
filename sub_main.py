@@ -1,5 +1,5 @@
 from sqlalchemy import select, update
-from helpers.format_data import format_json, a, promo_json, products_api
+from helpers.format_data import format_json, a, promo_json
 from sqlalchemy.sql import text
 from sub_main.database import obtener_session
 from sqlalchemy.exc import IntegrityError
@@ -27,7 +27,7 @@ def search():
         if fecha_aux == 1 or fecha_aux > fecha:
             data_big = format_json()
             data_promos = promo_json()
-            data_products = products_api()
+            # data_products = products_api()
             fecha = datetime.today().strftime('%Y-%m-%d')
         fecha_aux = datetime.today().strftime('%Y-%m-%d')
 
@@ -57,7 +57,7 @@ def search():
                             print(
                                 f"---------- search: {parametros['search']} ----------")
                             searched_articles = [
-                                item for item in data_products if f"{parametros['search'].lower()}" in item['description'].lower()]
+                                item for item in data_big if f"{parametros['search'].lower()}" in item['descripcion'].lower()]
                             cut_list = searched_articles
                             a['ctimestamp'] = time_stamp
                             a['registros'] = cut_list
@@ -115,7 +115,7 @@ def search():
                             print(
                                 f"---------- Todos los productos: {parametros['sucursal']} ----------")
                             a['ctimestamp'] = time_stamp
-                            a['registros'] = data_products
+                            a['registros'] = data_big
                             json_searched = json.dumps(a)
                             Peticioneservidor.update_request(
                                 session_mysql, estado=2, fecha=datetime.now(), parametro2=json_searched)

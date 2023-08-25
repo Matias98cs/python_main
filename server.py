@@ -21,7 +21,8 @@ arch = open('configDB.ini', 'r')
 DB = eval(arch.read())
 SQLALCHEMY_DATABASE_URI = searchDB(DB)
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+# CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=["*"])
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
@@ -90,4 +91,4 @@ async def home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8080)
