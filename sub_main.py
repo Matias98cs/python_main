@@ -67,10 +67,10 @@ def search():
 
                             # try:
                             #     with session_mysql.begin():
-                            #         query = text(
-                            #             "UPDATE Peticioneservidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = '"+json_searched+"' WHERE instancia = 'Py1' AND estado = 1 AND JSON_EXTRACT(parametro1, '$.s') = '"+parametros[
-                            #                 'search']+"' "
-                            #         )
+                            # query = text(
+                            #     "UPDATE Peticioneservidor SET estado = 2, fecha = CURRENT_TIMESTAMP, parametro2 = '"+json_searched+"' WHERE instancia = 'Py1' AND estado = 1 AND JSON_EXTRACT(parametro1, '$.s') = '"+parametros[
+                            #         'search']+"' "
+                            # )
                             #         session_mysql.execute(query)
                             #     session_mysql.commit()
                             # except IntegrityError as e:
