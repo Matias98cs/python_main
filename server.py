@@ -39,10 +39,12 @@ class Peticioneservidor(db.Model):
     parametro2 = db.Column(db.String)
     fechainsercion = db.Column(db.DateTime)
     fecha = db.Column(db.DateTime)
+    peticion = db.Column(db.Integer)
 
-    def __init__(self, parametro1, estado):
+    def __init__(self, parametro1, estado, peticion):
         self.parametro1 = parametro1
         self.estado = estado
+        self.peticion = peticion
 
 
 class Productos(db.Model):
@@ -61,7 +63,8 @@ class Categorias(db.Model):
 def insertar_y_obtener_datos(parametro1):
     try:
         with db.session.begin():
-            obj_saved = Peticioneservidor(parametro1=parametro1, estado=0)
+            obj_saved = Peticioneservidor(
+                parametro1=parametro1, estado=0, peticion=724)
             db.session.add(obj_saved)
             db.session.flush()
         obj_id = db.session.query(Peticioneservidor).filter_by(
@@ -96,11 +99,16 @@ async def home():
     parametro1 = json.dumps(parametro1)
     consult_id = insertar_y_obtener_datos(parametro1)
     await asyncio.sleep(0.01)
-    find = db.session.query(Peticioneservidor).filter_by(
-        id=consult_id).first()
-    response = make_response(find.parametro2, 200)
-    response.headers['Content-Type'] = 'application/json'
-    return response
+    find = db.session.query(Peticioneservidor).filter_by(id=consult_id).first()
+    # print(find.parametro2)
+    if find.parametro2 is not None:
+        response = make_response(find.parametro2, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    else:
+        response = make_response([], 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
 
 
 @app.route('/productos', methods=['GET'])
