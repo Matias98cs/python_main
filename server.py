@@ -100,7 +100,6 @@ async def home():
     consult_id = insertar_y_obtener_datos(parametro1)
     await asyncio.sleep(0.01)
     find = db.session.query(Peticioneservidor).filter_by(id=consult_id).first()
-    # print(find.parametro2)
     if find.parametro2 is not None:
         response = make_response(find.parametro2, 200)
         response.headers['Content-Type'] = 'application/json'
