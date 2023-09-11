@@ -21,7 +21,8 @@ arch = open('configDB.ini', 'r')
 DB = eval(arch.read())
 SQLALCHEMY_DATABASE_URI = searchDB(DB)
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:5173"])
+# CORS(app, origins=["http://localhost:5173"])
+CORS(app, origins=["*"])
 app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
@@ -38,16 +39,32 @@ class Peticioneservidor(db.Model):
     parametro2 = db.Column(db.String)
     fechainsercion = db.Column(db.DateTime)
     fecha = db.Column(db.DateTime)
+    peticion = db.Column(db.Integer)
 
-    def __init__(self, parametro1, estado):
+    def __init__(self, parametro1, estado, peticion):
         self.parametro1 = parametro1
         self.estado = estado
+        self.peticion = peticion
+
+
+class Productos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String)
+    precio = db.Column(db.Integer)
+    descripcion = db.Column(db.String)
+    categoria_id = db.Column(db.Integer)
+
+
+class Categorias(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre = db.Column(db.String)
 
 
 def insertar_y_obtener_datos(parametro1):
     try:
         with db.session.begin():
-            obj_saved = Peticioneservidor(parametro1=parametro1, estado=0)
+            obj_saved = Peticioneservidor(
+                parametro1=parametro1, estado=0, peticion=724)
             db.session.add(obj_saved)
             db.session.flush()
         obj_id = db.session.query(Peticioneservidor).filter_by(
@@ -82,12 +99,59 @@ async def home():
     parametro1 = json.dumps(parametro1)
     consult_id = insertar_y_obtener_datos(parametro1)
     await asyncio.sleep(0.01)
-    find = db.session.query(Peticioneservidor).filter_by(
-        id=consult_id).first()
-    response = make_response(find.parametro2, 200)
-    response.headers['Content-Type'] = 'application/json'
-    return response
+    find = db.session.query(Peticioneservidor).filter_by(id=consult_id).first()
+    if find.parametro2 is not None:
+        response = make_response(find.parametro2, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    else:
+        response = make_response([], 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+
+@app.route('/productos', methods=['GET'])
+def get_productos():
+    try:
+        get_all_productos = db.session.query(Productos).all()
+        productos_list = []
+        for product in get_all_productos:
+            product_dict = {
+                'id': product.id,
+                'nombre': product.nombre,
+                'precio': product.precio,
+                'descripcion': product.descripcion,
+                'categoria_id': product.categoria_id,
+
+            }
+            productos_list.append(product_dict)
+        response = make_response(productos_list, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+    except Exception as e:
+        print(f"Hubo un error: {e}")
+        return jsonify({"error": str(e)})
+
+
+@app.route('/categorias', methods=['GET'])
+def get_categorias():
+    try:
+        get_categorias = db.session.query(Categorias).all()
+        categorias_list = []
+        for categoria in get_categorias:
+            categoria_dict = {
+                "id": categoria.id,
+                "nombre": categoria.nombre
+            }
+            categorias_list.append(categoria_dict)
+        response = make_response(categorias_list, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    except Exception as e:
+        print(f"Hubo un error: {e}")
+        return jsonify({"error": str(e)})
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8080)
