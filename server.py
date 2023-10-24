@@ -2,6 +2,7 @@ from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
+from sub_main.models import Ofertas, Promocion
 import json
 import time
 import asyncio
@@ -108,6 +109,32 @@ async def home():
         response = make_response([], 200)
         response.headers['Content-Type'] = 'application/json'
         return response
+
+
+@app.route('/promocionesweb', methods=['GET'])
+def get_promociones():
+    try:
+        get_all_promociones = db.session.query(Promocion).all()
+        promociones_list = []
+        for promo in get_all_promociones:
+            promocion_dict = {
+                "idpromocion": promo.idpromocion,
+                "regla1": promo.regla1,
+                "regla2": promo.regla2,
+                "porcentaje": promo.porcentaje,
+                "monto": promo.monto,
+                "cantidad1": promo.cantidad1,
+                "cantidad2": promo.cantidad2,
+                "marca": promo.marca,
+                "codigo": promo.codigo,
+            }
+            promociones_list.append(promocion_dict)
+        response = make_response({"registro": promociones_list}, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    except Exception as e:
+        print(f"Error al obtener Promociones : {e}")
+        return jsonify({"error": str(e)})
 
 
 @app.route('/productos', methods=['GET'])
