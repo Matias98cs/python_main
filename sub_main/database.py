@@ -9,8 +9,7 @@ Base = declarative_base()
 def _crear_conexion(db_user, db_password, db_ip_address, db_name):
     url = f"mysql+pymysql://{db_user}:{db_password}@{db_ip_address}/{db_name}"
     try:
-        engine = create_engine(
-            url, echo=False, isolation_level='READ COMMITTED')
+        engine = create_engine(url, echo=False)
         return engine
     except:
         print(f"Error al crear conexion servidor: {db_ip_address}")
