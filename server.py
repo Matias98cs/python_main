@@ -111,6 +111,28 @@ async def home():
         return response
 
 
+@app.route('/ofertasweb', methods=['GET'])
+def get_ofertas():
+    try:
+        get_all_ofertas = db.session.query(Ofertas).all()
+        ofertas_list = []
+        for oferta in get_all_ofertas:
+            oferta_dict = {
+                "marca": oferta.marca,
+                "codigo": oferta.codigo,
+                "sucursal": oferta.sucursal,
+                "precio": oferta.precio,
+            }
+            ofertas_list.append(oferta_dict)
+
+        response = make_response({"registro": ofertas_list}, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    except Exception as e:
+        print(f"Error al obtener Ofertas : {e}")
+        return jsonify({"error": str(e)})
+
+
 @app.route('/promocionesweb', methods=['GET'])
 def get_promociones():
     try:
