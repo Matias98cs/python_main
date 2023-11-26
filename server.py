@@ -61,11 +61,11 @@ class Categorias(db.Model):
     nombre = db.Column(db.String)
 
 
-def insertar_y_obtener_datos(parametro1):
+def insertar_y_obtener_datos(parametro1, nro_peticion):
     try:
         with db.session.begin():
             obj_saved = Peticioneservidor(
-                parametro1=parametro1, estado=0, peticion=724)
+                parametro1=parametro1, estado=0, peticion=nro_peticion)
             db.session.add(obj_saved)
             db.session.flush()
         obj_id = db.session.query(Peticioneservidor).filter_by(
@@ -98,7 +98,7 @@ async def home():
         "ofertas": ofertas,
     }
     parametro1 = json.dumps(parametro1)
-    consult_id = insertar_y_obtener_datos(parametro1)
+    consult_id = insertar_y_obtener_datos(parametro1, 724)
     await asyncio.sleep(0.01)
     find = db.session.query(Peticioneservidor).filter_by(id=consult_id).first()
     if find.parametro2 is not None:
@@ -107,6 +107,41 @@ async def home():
         return response
     else:
         response = make_response([], 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
+
+@app.route('/promocionweb2', methods=['GET'])
+async def promociones_ofertas():
+    marca = request.args.get('marca')
+    codigo = request.args.get('codigo')
+    precio = request.args.get('precio')
+    timestamp = request.args.get('timestamp')
+    cantidad = request.args.get('cantidad')
+    usuario = request.args.get('usuario')
+    print(
+        f"Promociones web marca: {marca} | codigo: {codigo} | precio: {precio} | timestamp : {timestamp} | cantidad: {cantidad} | usuario: {usuario}")
+
+    parametro1 = {
+        "marca": marca,
+        "codigo": codigo,
+        "precio": precio,
+        "timestamp": timestamp,
+        "cantidad": cantidad,
+        "usuario": usuario
+    }
+    parametro1 = json.dumps(parametro1)
+    consulta_id = insertar_y_obtener_datos(parametro1, 729)
+    await asyncio.sleep(0.02)
+    find = db.session.query(Peticioneservidor).filter_by(
+        id=consulta_id).first()
+    if find.parametro2 is not None:
+        response = make_response(find.parametro2, 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    else:
+        response = make_response(
+            {"msg": "Aun no se contesta la peticion"}, 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
