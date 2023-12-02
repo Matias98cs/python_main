@@ -5,15 +5,32 @@ from .database import Base
 from helpers.gestores import comun
 
 
-class Peticioneservidor(Base, comun):
-    __tablename__ = 'peticioneservidor'
-    id = Column(Integer, primary_key=True)
-    instancia = Column(String(255))
-    estado = Column(Integer)
-    parametro1 = Column(String(255))
-    parametro2 = Column(TEXT)
-    fechainsercion = Column(Date)
-    fecha = Column(Date)
+# class Peticioneservidor(Base, comun):
+#     __tablename__ = 'peticioneservidor'
+#     id = Column(Integer, primary_key=True)
+#     instancia = Column(String(255))
+#     estado = Column(Integer)
+#     parametro1 = Column(String(255))
+#     parametro2 = Column(TEXT)
+#     fechainsercion = Column(Date)
+#     fecha = Column(Date)
+
+#     def __init__(self, parametro1, estado, peticion):
+#         self.parametro1 = parametro1
+#         self.estado = estado
+#         self.peticion = peticion
+
+# class Documentos(Base, comun):
+#     __tablename__ = 'Documentos'
+#     id = Column(Integer, primary_key=True)
+#     estado = Column(String(255))
+#     articulos = Column(String(255))
+#     clienteol = Column(String(255))
+
+#     def __init__(self, estado, articulos, clienteol):
+#         self.estado = estado
+#         self.articulos = articulos
+#         self.clienteol = clienteol
 
 
 class Ofertas(Base, comun):

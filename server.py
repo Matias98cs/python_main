@@ -28,10 +28,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
 db = SQLAlchemy(app)
 
 
-with app.app_context():
-    db.create_all()
-
-
 class Peticioneservidor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     instancia = db.Column(db.String)
@@ -48,6 +44,18 @@ class Peticioneservidor(db.Model):
         self.peticion = peticion
 
 
+class Documentos(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    estado = db.Column(db.String(1))
+    articulos = db.Column(db.String(255))
+    clienteol = db.Column(db.String(255))
+
+    def __init__(self, estado, articulos, clienteol):
+        self.estado = estado
+        self.articulos = articulos
+        self.clienteol = clienteol
+
+
 class Productos(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String)
@@ -59,6 +67,10 @@ class Productos(db.Model):
 class Categorias(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String)
+
+
+with app.app_context():
+    db.create_all()
 
 
 def insertar_y_obtener_datos(parametro1, nro_peticion):
@@ -106,7 +118,8 @@ async def home():
         response.headers['Content-Type'] = 'application/json'
         return response
     else:
-        response = make_response([], 200)
+        response = make_response(
+            {"msg": 'No se contesto la peticion, instancias caidas...'}, 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -118,21 +131,21 @@ async def promociones_ofertas():
     precio = request.args.get('precio')
     timestamp = request.args.get('timestamp')
     cantidad = request.args.get('cantidad')
-    usuario = request.args.get('usuario')
-    print(
-        f"Promociones web marca: {marca} | codigo: {codigo} | precio: {precio} | timestamp : {timestamp} | cantidad: {cantidad} | usuario: {usuario}")
-
+    clienteol = request.args.get('clienteol')
+    instancia = request.args.get('instancia')
     parametro1 = {
         "marca": marca,
         "codigo": codigo,
         "precio": precio,
         "timestamp": timestamp,
         "cantidad": cantidad,
-        "usuario": usuario
+        "clienteol": clienteol,
+        "instancia": instancia
     }
+    print(f'Promociones web 2 : {parametro1}')
     parametro1 = json.dumps(parametro1)
     consulta_id = insertar_y_obtener_datos(parametro1, 729)
-    await asyncio.sleep(0.02)
+    await asyncio.sleep(0.1)
     find = db.session.query(Peticioneservidor).filter_by(
         id=consulta_id).first()
     if find.parametro2 is not None:
@@ -141,9 +154,58 @@ async def promociones_ofertas():
         return response
     else:
         response = make_response(
-            {"msg": "Aun no se contesta la peticion"}, 200)
+            {"msg": "Aun no se contesta la peticion, instancias caidas..."}, 200)
         response.headers['Content-Type'] = 'application/json'
         return response
+
+
+@app.route('/itempedidoweb', methods=['POST'])
+def itempedidoweb():
+    data_post = request.get_json()
+    clienteol = data_post.get('clienteol')
+    estado = data_post.get('estado')
+    articulos = data_post.get('articulos')
+    if clienteol:
+        print(f'Se esta enviando el Clienteol: {clienteol}')
+        parametros1 = {
+            "clienteol": clienteol,
+            "estado": estado,
+            "articulos": articulos
+        }
+        articulos_json = json.dumps(articulos)
+        existente = db.session.query(Documentos).filter_by(
+            clienteol=clienteol).first()
+        if existente:
+            try:
+                existente.articulos = articulos_json
+                db.session.commit()
+                db.session.close()
+                response = make_response(
+                    {"msg": 'Documento creado y guardado', "informacion": parametros1}, 200)
+                response.headers['Content-Type'] = 'application/json'
+                return response
+            except Exception as e:
+                print(
+                    f"Error al actualizar articulos del Documento del cliente: {clienteol} - Error: {e}")
+        else:
+            print(f'No existe el Documento del clienteol: {clienteol}')
+            try:
+                objeto = Documentos(
+                    estado='B', articulos=articulos_json, clienteol=clienteol)
+                db.session.add(objeto)
+                db.session.commit()
+                print('Documento guardado')
+                response = make_response(
+                    {"msg": 'Documento creado y guardado', "informacion": parametros1}, 200)
+                response.headers['Content-Type'] = 'application/json'
+                db.session.close()
+                return response
+            except Exception as e:
+                print(f"Error al insertar a la tabla Documentos: {e}")
+
+    response = make_response({"msg": "No se envio en ClienteOl"}, 404)
+    response.headers['Content-Type'] = 'application/json'
+    return response
 
 
 @app.route('/ofertasweb', methods=['GET'])

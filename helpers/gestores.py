@@ -1,6 +1,8 @@
-# from sqlalchemy.exc import IntegrityError
-# from sqlalchemy.sql import text, and_, func
-# from sqlalchemy import select, update
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.sql import text, and_, func
+from sqlalchemy import select, update
+from flask import Flask, request, make_response, jsonify
+
 
 class comun():
     @classmethod
