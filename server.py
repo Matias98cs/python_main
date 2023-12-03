@@ -145,7 +145,7 @@ async def promociones_ofertas():
     print(f'Promociones web 2 : {parametro1}')
     parametro1 = json.dumps(parametro1)
     consulta_id = insertar_y_obtener_datos(parametro1, 729)
-    await asyncio.sleep(0.1)
+    await asyncio.sleep(0.2)
     find = db.session.query(Peticioneservidor).filter_by(
         id=consulta_id).first()
     if find.parametro2 is not None:
@@ -166,12 +166,12 @@ def itempedidoweb():
     estado = data_post.get('estado')
     articulos = data_post.get('articulos')
     if clienteol:
-        print(f'Se esta enviando el Clienteol: {clienteol}')
         parametros1 = {
             "clienteol": clienteol,
             "estado": estado,
             "articulos": articulos
         }
+        print(parametros1)
         articulos_json = json.dumps(articulos)
         existente = db.session.query(Documentos).filter_by(
             clienteol=clienteol).first()
@@ -188,7 +188,6 @@ def itempedidoweb():
                 print(
                     f"Error al actualizar articulos del Documento del cliente: {clienteol} - Error: {e}")
         else:
-            print(f'No existe el Documento del clienteol: {clienteol}')
             try:
                 objeto = Documentos(
                     estado='B', articulos=articulos_json, clienteol=clienteol)
