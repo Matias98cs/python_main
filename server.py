@@ -2,8 +2,8 @@ from flask import Flask, request, make_response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
-from sub_main.models import Ofertas, Promocion
-from sub_main.database import db_session, conexion_uri
+from sub_main.models import Ofertas, Promocion, Peticioneservidor, Documentos, Productos, Categorias
+from sub_main.database import conexion_uri
 import json
 import time
 import asyncio
@@ -13,48 +13,6 @@ app = Flask(__name__)
 CORS(app, origins=["*"])
 app.config["SQLALCHEMY_DATABASE_URI"] = conexion_uri
 db = SQLAlchemy(app)
-
-
-class Peticioneservidor(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    instancia = db.Column(db.String)
-    estado = db.Column(db.Integer)
-    parametro1 = db.Column(db.String)
-    parametro2 = db.Column(db.String)
-    fechainsercion = db.Column(db.DateTime)
-    fecha = db.Column(db.DateTime)
-    peticion = db.Column(db.Integer)
-
-    def __init__(self, parametro1, estado, peticion):
-        self.parametro1 = parametro1
-        self.estado = estado
-        self.peticion = peticion
-
-
-class Documentos(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    estado = db.Column(db.String(1))
-    articulos = db.Column(db.String(255))
-    clienteol = db.Column(db.String(255))
-
-    def __init__(self, estado, articulos, clienteol):
-        self.estado = estado
-        self.articulos = articulos
-        self.clienteol = clienteol
-
-
-class Productos(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String)
-    precio = db.Column(db.Integer)
-    descripcion = db.Column(db.String)
-    categoria_id = db.Column(db.Integer)
-
-
-class Categorias(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    nombre = db.Column(db.String)
-
 
 with app.app_context():
     db.create_all()
