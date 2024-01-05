@@ -1,5 +1,5 @@
 from sub_main.database import obtener_session
-from sub_main.models import Promocion, Ofertas
+from sub_main.models import Promocion, Ofertas, ArticulosWeb
 from datetime import datetime
 import requests
 import json
@@ -20,6 +20,10 @@ promociones = json.loads(response_promociones.content)
 url_ofertas = 'http://soportedlr.com.ar:9001/api/v1/ofertaswebec?sucursal=1'
 response_ofertas = requests.get(url_ofertas)
 ofertas = json.loads(response_ofertas.content)
+
+url_articulosweb = 'http://soportedlr.com.ar:9001/api/v1/articulosweb?sucursal=8'
+response_articulosweb = requests.get(url_articulosweb)
+articulosweb = json.loads(response_articulosweb.content)
 
 lista_errores_promociones = []
 for item in promociones['registros']:
@@ -47,3 +51,16 @@ for item in ofertas['registros']:
 
 session_db.commit()
 print('Datos de ofertas cargados en DB')
+
+lista_errores_articulosweb = []
+for item in articulosweb['registros']:
+    try:
+        art_web = ArticulosWeb.crear_y_obtener(session_db, **item)
+        session_db.commit()
+    except Exception as e:
+        print(f"Error al cargar los articulos web : {e}")
+        session_db.rollback()
+        lista_errores_articulosweb.append(item)
+
+session_db.commit()
+print('Datos de articulos web cargados en DB')
