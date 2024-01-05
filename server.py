@@ -3,28 +3,15 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from sqlalchemy.exc import IntegrityError
 from sub_main.models import Ofertas, Promocion
+from sub_main.database import db_session, conexion_uri
 import json
 import time
 import asyncio
 
-
-def searchDB(DB):
-    driver = DB['driver'][1:11]
-    if driver == 'SQL Server':
-        # URI = f'mssql+pymssql://{DB["username"]}:{DB["password"]}@{DB["server"]}:{DB["port"]}/{DB["database"]}'
-        URI = f'mysql+pymysql://{DB["username"]}:{DB["password"]}@{DB["server"]}:{DB["port"]}/{DB["database"]}'
-    elif driver == 'PostgreSQL':
-        URI = f'postgresql+psycopg2://{DB["username"]}:{DB["password"]}@{DB["server"]}:{DB["port"]}/{DB["database"]}'
-    return URI
-
-
-arch = open('configDB.ini', 'r')
-DB = eval(arch.read())
-SQLALCHEMY_DATABASE_URI = searchDB(DB)
 app = Flask(__name__)
 # CORS(app, origins=["http://localhost:5173"])
 CORS(app, origins=["*"])
-app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
+app.config["SQLALCHEMY_DATABASE_URI"] = conexion_uri
 db = SQLAlchemy(app)
 
 

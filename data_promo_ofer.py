@@ -1,17 +1,10 @@
-from sub_main.database import obtener_session
+from sub_main.database import obtener_session, db_session
 from sub_main.models import Promocion, Ofertas, ArticulosWeb
 from datetime import datetime
 import requests
 import json
 
-arch = open('ConfigDB.ini', 'r')
-DB = eval(arch.read())
-user = DB['username']
-password = DB['password']
-ip_address = DB['server']
-db_name = DB['database']
-
-session_db = obtener_session(user, password, ip_address, db_name)
+session_db = db_session
 
 url_promociones = 'http://soportedlr.com.ar:9001/api/v1/promocioneswebec'
 response_promociones = requests.get(url_promociones)
